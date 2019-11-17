@@ -1,0 +1,38 @@
+import easygui
+def su(n):
+	if n==2:
+		return True
+	d=n-1
+	while d>1:
+		if n%d==0:
+			return False
+		d=d-1
+	return True
+def mul(x,y):
+	return x*y
+from functools import reduce
+def fact1(n):
+	p=[]
+	while su(n)==False:
+		d=n
+		L=[]
+		while d>1:
+			if n%d==0:
+				L.append(d)
+			d=d-1
+		M=list(filter(su,L))
+		a=reduce(mul,M)
+		n=n//a
+		p=p+M
+	if su(n)==True:
+		p=p+[n]
+		p=[str(x) for x in p]
+		p1='×'.join(p)
+	return p1
+def fact(n):
+	o=fact1(n)
+	return o
+x=easygui.enterbox('分解质因数：')
+y=int(x)
+fact(y)
+easygui.msgbox('%d=%s'%(y,fact(y)),'分解质因数')
